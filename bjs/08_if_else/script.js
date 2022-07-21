@@ -57,6 +57,15 @@ document.getElementById('btnLess').addEventListener('click', function () {
     }
 })
 
+document.getElementById('btnRetry').addEventListener('click', function () {
+    let minValue = parseInt(prompt('Минимальное знание числа для игры','0'));
+    let maxValue = parseInt(prompt('Максимальное знание числа для игры','100'));
+    alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
+    let answerNumber  = Math.floor((minValue + maxValue) / 2);
+    let orderNumber = 1;
+    answerField.innerText = `Вы загадали число ${answerNumber }?`;
+})
+
 document.getElementById('btnEqual').addEventListener('click', function () {
     if (gameRun){
         answerField.innerText = `Я всегда угадываю\n\u{1F60E}`
