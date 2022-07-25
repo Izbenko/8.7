@@ -170,9 +170,65 @@ const personGenerator = {
 
     },
 
-    randomBirthYear: function() {
+    randomBorn: function() {
 
-        return this.randomIntNumber(2000, 1900) + ' г.г.';
+        let year = this.randomIntNumber(2003, 1940);
+        let m = this.randomIntNumber(12, 1);
+        let month;
+        let day;
+
+        switch (m) {
+            case 1:
+                month = ' января ';
+                day = this.randomIntNumber(31, 1);
+                break;
+            case 2:
+                month = ' февраля ';
+                day = this.randomIntNumber(28, 1);
+                break;
+            case 3:
+                month = ' марта ';
+                day = this.randomIntNumber(31, 1);
+                break;
+            case 4:
+                month = ' апреля ';
+                day = this.randomIntNumber(30, 1);
+                break;
+            case 5:
+                month = ' мая ';
+                day = this.randomIntNumber(31, 1);
+                break;
+            case 6:
+                month = ' июня ';
+                day = this.randomIntNumber(30, 1);
+                break;
+            case 7:
+                month = ' июля ';
+                day = this.randomIntNumber(31, 1);
+                break;
+            case 8:
+                month = ' августа ';
+                day = this.randomIntNumber(31, 1);
+                break;
+            case 9:
+                month = ' сентября ';
+                day = this.randomIntNumber(30, 1);
+                break;
+            case 10:
+                month = ' октября ';
+                day = this.randomIntNumber(31, 1);
+                break;
+            case 11:
+                month = ' ноября ';
+                day = this.randomIntNumber(30, 1);
+                break;
+            case 12:
+                month = ' декабря ';
+                day = this.randomIntNumber(31, 1);
+                break;
+        };
+
+        return day + month + year + ' г.р.'
 
         },
 
@@ -184,7 +240,7 @@ const personGenerator = {
         this.person.surname = this.randomSurname(this.person.gender);
         this.person.profession = this.randomProfession(this.person.gender);
         this.person.patronymic = this.randomPatronymic(this.person.gender);
-        this.person.birthYear = this.randomBirthYear();
+        this.person.born = this.randomBorn();
         return this.person;
     }
 };
