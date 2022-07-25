@@ -95,12 +95,19 @@ const personGenerator = {
 
     },
 
+    randomBirthYear: function() {
+
+        return this.randomIntNumber(2000, 1900) + ' г.г.';
+
+        },
+
 
     getPerson: function () {
         this.person = {};
         this.person.gender = this.randomGender();
         this.person.firstName = this.randomFirstName(this.person.gender);
         this.person.surname = this.randomSurname(this.person.gender);
+        this.person.birthYear = this.randomBirthYear();
         return this.person;
     }
 };
