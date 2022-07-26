@@ -156,27 +156,14 @@ function randomSuccess() {
     return success;
 } // функция для рандомного успеха
 
-let minValue = parseInt(prompt('Минимальное знание числа для игры', '0'));
-let maxValue = parseInt(prompt('Максимальное знание числа для игры', '100'));
-minValue = (minValue < -999) ? -999 : minValue;
-maxValue = (maxValue > 999) ? 999 : maxValue;
-minValue = (isNaN(minValue)) ? 0 : minValue;
-maxValue = (isNaN(maxValue)) ? 100 : maxValue;
-alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
-let answerNumber = Math.floor((minValue + maxValue) / 2);
-let orderNumber = 1;
-let gameRun = true;
-
 const orderNumberField = document.getElementById('orderNumberField');
 const answerField = document.getElementById('answerField');
 
-orderNumberField.innerText = orderNumber;
-
-if (digToStr(answerNumber).length < 20) {
-    answerField.innerText = `${randomAnswer()} ${digToStr(answerNumber)}?`;
-} else {
-    answerField.innerText = `${randomAnswer()} ${answerNumber}?`;
-}
+let minValue
+let maxValue
+let orderNumber;
+let answerNumber;
+let gameRun = false;
 
 document.getElementById('btnOver').addEventListener('click', function () {
     if (gameRun) {
@@ -227,17 +214,8 @@ document.getElementById('btnLess').addEventListener('click', function () {
 })
 
 document.getElementById('btnRetry').addEventListener('click', function () {
-    minValue = parseInt(prompt('Минимальное знание числа для игры', '0'));
-    maxValue = parseInt(prompt('Максимальное знание числа для игры', '100'));
-    minValue = (minValue < -999) ? -999 : minValue;
-    maxValue = (maxValue > 999) ? 999 : maxValue;
-    minValue = (isNaN(minValue)) ? 0 : minValue;
-    maxValue = (isNaN(maxValue)) ? 100 : maxValue;
-    alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
-    answerNumber = Math.floor((minValue + maxValue) / 2);
-    orderNumber = 1;
-    gameRun = true;
-    answerField.innerText = `${randomAnswer()} ${answerNumber}?`;
+    location.reload();
+
 })
 
 document.getElementById('btnEqual').addEventListener('click', function () {
@@ -245,5 +223,27 @@ document.getElementById('btnEqual').addEventListener('click', function () {
         answerField.innerText = `${randomSuccess()}`;
         gameRun = false;
     }
+})
+
+document.getElementById('submit').addEventListener('click', function () {
+    minValue = parseInt(document.getElementById('min').value);
+    maxValue = parseInt(document.getElementById('max').value);
+    minValue = (minValue < -999 || minValue > 999) ? -999 : minValue;
+    maxValue = (maxValue > 999 || maxValue < -999) ? 999 : maxValue;
+    minValue = (isNaN(minValue)) ? 0 : minValue;
+    maxValue = (isNaN(maxValue)) ? 100 : maxValue;
+    answerNumber = Math.floor((minValue + maxValue) / 2);
+    orderNumber = 1;
+    gameRun = true;
+
+    orderNumberField.innerText = orderNumber;
+
+    if (digToStr(answerNumber).length < 20) {
+        answerField.innerText = `${randomAnswer()} ${digToStr(answerNumber)}?`;
+    } else {
+        answerField.innerText = `${randomAnswer()} ${answerNumber}?`;
+    }
+
+    document.getElementById("header").innerHTML = `<p>Поиск числа от ${minValue} до ${maxValue}</p>`;
 })
 
